@@ -1,0 +1,39 @@
+.header {
+  background-color: grey;
+  margin: 10px;
+  height: 100px;
+  /* width: 100%; */
+}
+
+main {
+  margin: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.product-list {
+  display: flex;
+  width: 65%;
+  background-color: rgb(193, 193, 209);
+  min-height: 30px;
+}
+
+.cart {
+  background-color: rgb(190, 150, 150);
+  min-height: 30px;
+  flex-grow: 1;
+}
+
+.product {
+  flex-grow: 0.3;
+  border: 2px solid blue;
+  aspect-ratio: 1;
+}
+
+.product-image {
+
+}
+
+.product-name {
+  
+}

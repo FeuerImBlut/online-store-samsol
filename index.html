@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Store</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <header class="header">
+    <img class="logo" src="" alt="logo">
+    <h2>Online Store</h2>
+  </header>
+  <main>
+    <div class="product-list"></div>
+    <div class="cart">
+      <h3>Cart</h3>
+      <div class="cart-items"></div>
+      <p class="cart-total"></p>
+    </div>
+  </main>
+  <footer class="footer"></footer>
+  <template id="product-template">
+    <div class="product">
+      <img class="product-image" src="" alt="">
+      <h4 class="product-name">Name</h4>
+      <p class="product-description">Description</p>
+      <p class="product-price">Price</p>
+      <button class="product-buy">Buy</button>
+    </div>
+  </template>
+  <template id="cart-item-template">
+    <div class="cart-item">
+      <h4 class="cart-item-name"></h4>
+      <p class="cart-item-price"></p>
+      <button class="cart-item-remove">Remove</button>
+    </div>
+  </template>
+  <script src="./index.js" type="module"></script>
+</body>
+
+</html>
