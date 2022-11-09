@@ -2,7 +2,7 @@ import { productList } from "./products.js";
 
 const productListDiv = document.querySelector('.product-list');
 const productTemplate = document.querySelector('#product-template');
-const cart = [];
+let cart = [];
 
 function createProducts(products) {
   for (let item of products) {
@@ -12,20 +12,22 @@ function createProducts(products) {
 
 function createProduct(product) {
   let { image, name, description, price, id } = product;
-  const clone = productTemplate.content.cloneNode(true);
-  const productChildrenNodes = clone.children[0].children;
-  // clone.querySelector('.product-image').src = image;
-  productChildrenNodes[0].src = image;
-  productChildrenNodes[1].textContent = name;
-  productChildrenNodes[2].textContent = description;
-  productChildrenNodes[3].textContent = price;
-  productChildrenNodes[4].addEventListener('click', (e) => {
-    // const productId = e.target.parentElement.id;
-    // addToCart(productId);
+  const productClone = productTemplate.content.cloneNode(true);
+  const productItem = productClone.querySelector('.product');
+  const productImage = productClone.querySelector('.product-image');
+  if (productImage) productImage.src = `./assets/images/${image}.webp`;
+  const productName = productClone.querySelector('.product-name');
+  if (productName) productName.textContent = name;
+  const productDescription = productClone.querySelector('.product-description');
+  if (productDescription) productDescription.textContent = description;
+  const productPrice = productClone.querySelector('.product-price');
+  if (productPrice) productPrice.textContent = price.toString();
+  const productBuyButton = productClone.querySelector('.product-buy');
+  if (productBuyButton) productBuyButton.addEventListener('click', (e) => {
     addToCart(id)
   });
-  clone.children[0].id = id;
-  productListDiv.append(clone);
+  productItem.id = id;
+  productListDiv.append(productClone);
 }
 
 function addToCart(id) {
@@ -42,25 +44,49 @@ function addToCart(id) {
     cart.push({
       id: item.id,
       name: item.name,
+      price: item.price,
       quantity: 1
     });
   }
   console.log(cart);
+  drawCart();
 }
 
 function drawCart() {
   const cartDiv = document.querySelector('.cart-items');
+  cartDiv.innerHTML = '';
   const cartTotal = document.querySelector('.cart-total');
-  for (let item in cart) {
-    
+  let totalSum = 0;
+  for (let item of cart) {
+    const cartItem = createCartItem(item);
+    cartDiv.append(cartItem);
+    totalSum += item.quantity * item.price;
   }
+  cartTotal.textContent = totalSum.toString();
 }
 
 function createCartItem(item) {
-  let { id, price, quantity } = item;
   const cartItemTemplate = document.querySelector('#cart-item-template');
-  const cartItemClone = cartItemTemplate.content.clone(true);
+  const cartItemClone = cartItemTemplate.content.cloneNode(true);
+  const cartItemName = cartItemClone.querySelector('.cart-item-name');
+  if (cartItemName) cartItemName.textContent = item.name;
+  const cartItemPrice = cartItemClone.querySelector('.cart-item-price');
+  if (cartItemPrice) cartItemPrice.textContent = item.price.toString();
+  const cartItemRemoveButton = cartItemClone.querySelector('.cart-item-remove');
+  if (cartItemRemoveButton) cartItemRemoveButton.addEventListener('click', () => {
+    removeItemFromCart(item.id);
+  });
+  return cartItemClone;
+}
 
+function removeItemFromCart(id) {
+  console.log(id);
+  cart = cart.filter((el) => {
+    console.log(el.id);
+    console.log(el.id != id);
+    return (el.id != id);
+  });
+  drawCart();
 }
 
 createProducts(productList);
