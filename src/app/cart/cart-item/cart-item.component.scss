@@ -1,4 +1,24 @@
 :host {
-  display: block;
-  border: 2px solid black;
+  border: 2px solid rgba(214, 154, 127, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &:not(:first-of-type) {
+    border-top: none;
+  }
+
+  .cart-item-remove {
+    border: none;
+    height: 50%;
+    width: 25px;
+    font-size: 20px;
+  }
 }
+
+

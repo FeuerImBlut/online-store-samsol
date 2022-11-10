@@ -17,6 +17,6 @@ export class ProductComponent implements OnInit {
     this.cartService.addProductToCart(item);
   }
 
-  @Input() product: any;
+  @Input() product: Product | null = null;
 
 }

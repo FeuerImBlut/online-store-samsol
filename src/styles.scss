@@ -1,4 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 * {
   box-sizing: border-box;
+  font-family: 'main-font';
+}
+
+h4,
+p {
+  margin: 5px;
+}
+
+button {
+  background: transparent;
+  border-radius: 10px;
+  transition: linear 0.1s;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  &:hover {
+    cursor: pointer;
+  }
+
+}
+
+
+@font-face {
+  font-family: 'main-font';
+  src: url(./assets/fonts/Skriva-Bold.ttf);
 }

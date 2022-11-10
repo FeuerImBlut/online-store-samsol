@@ -8,7 +8,10 @@ import { CartItem, Product } from './models/models';
 export class CartService {
   private cart: CartItem[];
   private totalSum: number = 0;
-  // public metaDataSource: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
+  public totalSumDataSource: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public cartDataSource: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
+  public checkOutDataSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor() {
     this.cart = [];
   }
@@ -27,12 +30,8 @@ export class CartService {
       this.cart.push(cartNewItem);
     }
     // console.log(this.cart);
-    // this.metaDataSource.next(this.cart);
-    for (let product of this.cart) {
-      this.totalSum = Math.floor(this.totalSum += product.price * product.quantity * 100) / 100;
-    }
-    console.log(this.totalSum);
-    
+    this.recalculateSum();
+
   }
 
   getCartData() {
@@ -41,5 +40,33 @@ export class CartService {
 
   getTotalSum() {
     return this.totalSum;
+  }
+
+  clearCart() {
+    this.cart = [];
+    this.cartDataSource.next(this.cart);
+    if (this.totalSum) {
+      this.recalculateSum();
+      this.checkOutDataSource.next(true);
+
+    }
+
+  }
+
+  removeItemFromCart(item: CartItem) {
+    this.cart = this.cart.filter(el => {
+      return el.id !== item.id;
+    });
+    this.recalculateSum();
+    this.cartDataSource.next(this.cart);
+  }
+
+  private recalculateSum() {
+    this.totalSum = 0;
+    for (let product of this.cart) {
+      this.totalSum += product.price * product.quantity;
+      this.totalSum = Number(this.totalSum.toFixed(2));
+    }
+    this.totalSumDataSource.next(this.totalSum);
   }
 }

@@ -11,10 +11,12 @@ export class CartComponent implements OnInit {
   cart: CartItem[] = [];
   totalSum = 0;
   constructor(private cartService: CartService) {
-    // this.cartService.metaDataSource.subscribe(data => {
-    //   this.cart = data;
-    // });
-    
+    this.cartService.totalSumDataSource.subscribe(data => {
+      this.totalSum = data;
+    });
+    this.cartService.cartDataSource.subscribe(data => {
+      this.cart = data;
+    });
   }
   private gerCartData() {
     this.cart = this.cartService.getCartData();
@@ -23,7 +25,11 @@ export class CartComponent implements OnInit {
   private getTotalSum() {
     this.totalSum = this.cartService.getTotalSum();
   }
-  
+
+  clearCart() {
+    this.cartService.clearCart();
+  }
+
   ngOnInit(): void {
     this.gerCartData();
     this.getTotalSum();

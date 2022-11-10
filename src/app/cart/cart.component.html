@@ -1,4 +1,6 @@
+<p class="cart-name">CART</p>
 <ng-container *ngFor="let item of cart">
   <app-cart-item [cartItem]="item"></app-cart-item>
 </ng-container>
-<p>Total:{{totalSum}}</p>
+<p class="total-sum">Total: ${{totalSum}}</p>
+<button class="checkout" (click)="clearCart()">Checkout</button>
