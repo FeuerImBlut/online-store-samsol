@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  gap: 10px;
+  max-width: 100vw;
+}
+
+.header {
+  background-color: grey;
+  margin: 10px;
+  height: 200px;
+}

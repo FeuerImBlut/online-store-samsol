@@ -1,0 +1,9 @@
+:host {
+  background-color: bisque;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  background-color: rgb(193, 193, 209);
+  min-height: 30px;
+  flex-basis: 70%;
+}

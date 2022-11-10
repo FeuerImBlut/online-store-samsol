@@ -1,1 +1,4 @@
-<p>cart works!</p>
+<ng-container *ngFor="let item of cart">
+  <app-cart-item [cartItem]="item"></app-cart-item>
+</ng-container>
+<p>Total:{{totalSum}}</p>
